@@ -1,0 +1,27 @@
+@charset "utf-8";
+/*
+*   reset 重置文件
+*	
+*	不包括 mixin  定义 一些基础的 reset
+*
+*
+*/
+//@import "compass_reset";
+$wap: false !default;
+@if $wap == true {		//wap html5
+	html,body {
+		overflow-x:hidden;
+		-webkit-text-size-adjust:100%;
+		-o-text-size-adjust:100%;
+		-ms-text-size-adjust:100%;
+	}
+}@else {			//普通的
+	//@include global-reset;
+}
+
+
+
+
+
+
+

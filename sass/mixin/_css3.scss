@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+// css3 常用的一些 定义
+
+// 各种浏览器 支持 -moz- -webkit-等
+@mixin support($property,$value){
+	@include experimental($property,$value,-webkit,-moz,-o,-ms,official);
+} 
+
+//border-radius
+@mixin border-radius(){
+	
+}
+

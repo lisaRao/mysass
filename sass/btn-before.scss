@@ -1,0 +1,180 @@
+@charset "utf-8";
+/*	全局按钮 安装 更新 效果
+	4种size 按钮 分别是
+	size 1 ----- 60 * 26 ( 58 * 24 ) border 1px	small 
+	size 2 ----- 70 * 26	( 68 * 24 ) border 1px	middle
+	size 3 ----- 138 * 48 (136 * 46) border 1px  xlarge 
+	size 4 ----- 90 *36 (88*34) 每日发现	large
+	每种size有 2中操作   install    ,  update
+	每种操作有 5中状态 分别是 default , hover , downing ,installing , done ;
+*/
+// 定义
+$width:58px;  //最小尺寸
+$height:24px;
+$border-color:#ccd4de;
+$font-color:#3f4456;
+$background-color:#2d78db;
+$border-radius-size:2px;
+$light-gray-color:#bcc5d1;	// 默认边框颜色
+$gray-color:#3f4456;	// 默认文字颜色
+// $dark-blue-color:$hover-blue-color;	// 大按钮 hover 背景色
+// $blue-color:$default-blue-color;		// hover 状态颜色
+$light-green-color:#d7e7de;	// 更新颜色 边框颜色
+$green-color:#13ba61;		// 字体颜色
+$white-color:#fff;
+
+//按钮
+@mixin pp-btn(
+	$width:58px,
+	$height:24px,
+	$border-color:#ccd4de,
+	$font-color:#3f4456,
+	$border:true,
+	$background:false,
+	$border-radius:false,
+	$background-color:#257cf0,
+	$border-radius-size:3px){
+		width:$width;
+		height: $height;
+		line-height: $height;	
+		color: $font-color;
+		@if $border {
+			border:solid 1px $border-color;
+		}
+		@if $background {
+			background-color: $background-color;
+		}@else {
+			background-color: $white-bgc;
+		}
+		@if $border-radius {
+			border-radius: $border-radius-size;
+			font-size: 20px;
+		}
+		display: block;
+		text-align: center;
+		cursor: pointer;
+		transition-duration:0;
+}
+// 下载中
+@mixin pp-btn-down($width:58px,$height:24px,$color:#257cf0){
+	width: $width;
+	height: $height;
+	border:solid 1px $color;
+	color:$color;
+	position:relative; 
+}
+
+// //default and hover
+// .small-btn {
+// 	@include pp-btn;
+// 	&:hover {
+// 		@include pp-btn($width,$height,$blue-color,$blue-color);
+// 	}
+// }
+// .middle-btn {
+// 	@include pp-btn(68px,24px);
+// 	&:hover {
+// 		@include pp-btn(68px,24px,$blue-color,$blue-color);
+// 	}
+// }
+// .large-btn {
+//  	@include pp-btn(138px,48px,0,$white-color,false,true,true);
+// 	&:hover {
+// 		@include pp-btn(138px,48px,0,$white-color,false,true,true,$dark-blue-color);
+// 	}
+// }
+
+// // ing 操作中  下载 down-ing   安装 install-ing  添加动画效果
+// .small-btn.downing {  //this size small
+// 	@include pp-btn-down;  
+// }
+// .middle-btn.downing {
+// 	@include pp-btn-down(68px,24px);
+// 	background-color: $white-bgc;	
+// }
+// .large-btn.downing {
+// 	@include pp-btn-down(136px,46px);
+// 	background-color: $white-bgc;
+// 	.progress-color {
+// 		height: 46px;
+// 	}
+// }
+// .downing {
+// 	span{
+// 		position: relative;
+// 		z-index: 5;
+// 	}
+// 	.progress-color {
+// 		display: block;
+// 		z-index: 1;
+// 	}
+// }
+// .progress-color {
+// 	position: absolute;
+// 	left: 0;
+// 	top:0;
+// 	height: 24px;
+// 	background-color:#ddecff;
+// 	display: none;
+// }
+
+//安装中
+@mixin install($name,$width:60px,$height:26px){
+	$url : '../../images/app/#{$name}.gif';
+	width:$width;
+	height:$height;	
+	background:url($url) no-repeat;
+	display: block;
+	text-indent: -999em;
+}
+// .small-btn.installing{
+// 	border:0 none;
+// 	@include install(small-install-ing);
+// }
+// .middle-btn.installing {
+// 	border:0 none;
+// 	@include install(m-install-ing,70px);
+// }
+// .large-btn.installing {
+// 	border:0 none;
+// 	@include install(large-install-ing,138px,48px);
+// }
+
+// // complete  success 完成  下载 或 安装成功  and hover
+// .small-btn.done {
+// 	@include pp-btn($width,$height,$light-gray-color,$light-gray-color);
+// 	&:hover {
+// 		@include pp-btn($width,$height,$blue-color,$blue-color);
+// 	}
+// }
+// .middle-btn.done {
+// 	@include pp-btn(68px,24px,$light-gray-color,$light-gray-color);
+// 	&:hover {
+// 		@include pp-btn(68px,24px,$blue-color,$blue-color);
+// 	}
+// }
+// .large-btn.done{
+//  	@include pp-btn(136px,46px,#e4e8f0,#c3c8d4,true,true,true,#f6f7fa);
+// 	&:hover {
+// 		@include pp-btn(136px,46px,$dark-blue-color,$white-color,true,true,true,$dark-blue-color);
+// 	}
+// }
+// //complete  fail  下载失败 或安装失败
+// .small-btn.update {
+// 	@include pp-btn($width,$height,$light-green-color,$green-color);
+// 	&:hover {
+// 		@include pp-btn($width,$height,$green-color,$green-color);
+// 	}
+// }
+// .middle-btn.update {
+// 	@include pp-btn(68px,24px,$light-green-color,$green-color);
+// 	&:hover {
+// 		@include pp-btn(68px,24px,$green-color,$green-color);
+// 	}
+// }
+// .large-btn.update {
+//  	@include pp-btn(138px,48px,0,$white-color,false,true,true,$green-color);
+// 	&:hover {
+// 		@include pp-btn(138px,48px,0,$white-color,false,true,true,#2bc975);
+// 	}
+// }

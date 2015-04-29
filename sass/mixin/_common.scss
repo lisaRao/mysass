@@ -1,0 +1,14 @@
+@charset "utf-8";
+/*
+*	平时一些 常用的公共 样式	
+*	common stylesheet
+*	
+*/
+@import "my_reset";
+
+//设置默认字体
+html,body {
+	@include set-scroll-x;
+	@include default-font;
+	@include ios-default-font-family;
+}

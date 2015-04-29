@@ -1,0 +1,122 @@
+@charset "utf-8";
+/* 
+*	reset stylesheet
+*	lisarao@gamil.com
+* 
+*/
+
+// 全局 reset 定义
+@mixin global-reset {
+	html, body, div, span,object, iframe,
+	h1, h2, h3, h4, h5, h6, p, 
+	a, address, big, cite, code,
+	em, img, q, s,
+	small, strong, sub, sup, tt,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output,section, summary,
+	time, mark, audio, video {
+		@include reset-box-model;
+		// @include text-size-adjust;
+	}
+	@include reset-html5;
+
+	ol,ul {
+		@include reset-list-style;
+	}
+	table {
+		@include reset-table;
+	}
+	img {
+		@include  reset-image-anchor-border;
+	}
+	a img {
+		@include touch-callout;
+	}
+}
+// 盒模式 reset 定义
+@mixin reset-box-model {
+	margin:0;
+	padding:0;
+}
+// list style
+@mixin reset-list-style {
+	list-style: none;
+}
+// table
+@mixin reset-table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+//image border [ ie7- ]
+@mixin reset-image-anchor-border {
+	border:0 none;
+}
+// html 5 block 
+@mixin reset-html5 {
+	#{elements-of-type(html5-block)}{
+		display:block;
+	}
+}
+
+
+//ios default font family
+//英文和数字 使用字体
+//ios 4+ Helvetica Neue
+//ios 4- Helvetica
+//Heiti SC Light 黑体-简 细体
+// Heiti SC Medium 黑体-简 中黑
+// Heiti TC Light 黑体-繁 细体
+// Heiti TC Medium 黑体-繁 中黑
+
+@mixin ios-default-font-family {
+	font-family:"Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+}
+
+// 4.0 之前版本英文字体原生 Android 使用的是 Droid Sans，中文字体原生 Android 会命中 Droid Sans Fallback
+// 4.0 之后中英文字体都会使用原生 Android 新的 Roboto 字体
+// 其他第三方 Android 系统也一致选择默认的无衬线字体
+@mixin android-default-font-family {
+	font-family:"Roboto", Helvetica, "Droid Sans Fallback", sans-serif;
+}
+
+ /* 禁止长按链接与图片弹出菜单 */
+ @mixin touch-callout {
+ 	-webkit-touch-callout : none;
+ }
+
+// focus outline
+@mixin reset-focus {
+	outline: 0 ;
+}
+
+// font-size adjust 低版本的chrome才使用 后期 已经被取消
+@mixin text-size-adjust {
+	-webkit-text-size-adjust:none;
+	-ms-text-size-adjust:100%;
+	-webkit-text-size-adjust:100%;
+}
+
+// overflow -x  scroll hidden
+@mixin set-scroll-x {
+	overflow-x:hidden;
+}
+//用户选择文本 
+ @mixin user-select {
+	-webkit-user-select : none;
+	user-select : none;
+ }
+//font
+ @mixin default-font {
+ 	font:1em/1.5 "Helvetica Neue", Helvetica, 'microsoft yahei', STHeiTi, sans-serif;
+ }
+//字体平滑
+ @mixin font-smoothing {
+ 	-webkit-font-smoothing:antialiased;	//最佳平滑效果
+ }
+
+

@@ -1,0 +1,370 @@
+@charset "utf-8";
+$default-blue-color:#257cf0;	// 默认蓝色
+$hover-blue-color:#4c99ff;		//hover 颜色
+a {
+	text-decoration: none;
+	margin-bottom: 15px;
+}
+@mixin btn-size ($size:small,$is-gif:false){
+	@if $size == small {
+		width:58px;
+		height:24px;
+		line-height: 24px;
+		font-size: 12px;
+	}
+	@if $size == middles {
+		width: 68px;
+		height: 24px;
+		line-height: 24px;
+		font-size: 12px;
+	}
+	@if $size == large {
+		width: 88px;
+		height: 34px;
+		line-height: 34px;
+		font-size: 14px;
+	}
+	@if $size == xlarge {
+		width: 136px;
+		height: 46px;
+		line-height: 46px;
+		font-size: 20px;
+	}
+	@if $is-gif {
+		@if $size == small {
+			width:60px;
+			height:26px;
+		}
+		@if $size == middles {
+			width: 70px;
+			height: 26px;
+		}
+		@if $size == large {
+			width: 90px;
+			height: 36px;
+		}
+		@if $size == xlarge {
+			width: 138px;
+			height: 48px;
+		}
+	}
+}
+@mixin btn-has-bg($color) {
+	background-color:$color;
+	border-color:$color;
+}
+@mixin bg-color(
+		$size,
+		$handle,
+		$status
+	) {
+	@if $size == large {
+		@include btn-has-bg(#13ba61);
+		@if $status == hover {
+			@include btn-has-bg(#2bc975);
+		}
+		@if $handle == update {	
+			@include btn-has-bg(#58c400);
+			@if $status == hover { 
+				@include btn-has-bg(#6ad513);
+			}
+		}
+	}
+	@if $size == xlarge {
+		@include btn-has-bg($default-blue-color);
+		@if $status == hover {
+			@include btn-has-bg($hover-blue-color);
+		}
+		@if $handle == update {	
+			@include btn-has-bg(#13ba61);
+			@if $status == hover { 
+				@include btn-has-bg(#2bc975);
+			}
+		}
+	}
+}
+@mixin border-color(
+		$size,
+		$handle:install,
+		$status:defauls,
+		$hasbg:false
+	){
+		@if $hasbg == true {
+			color:#fff;
+			border-style:solid;
+			border-width: 1px;
+			@include bg-color($size,$handle,$status);
+		}
+		@else {
+			@if $handle == install {
+				@if $status == defauls {					
+					border-color:#ccd4de;
+					color:#3f4456;
+				}@else {
+					border-color:currentColor;
+				}
+				@if $status == hover {
+					color:$hover-blue-color;
+				}
+				@if $status == downing {
+					color:$default-blue-color;
+				}
+				@if $size == large {
+					@if $status == downing {
+						color:#13ba61;
+					}
+				}
+			
+				@if $status == done {
+					color:#ccd4de;
+				}
+			}
+			@if $handle == update {
+				@if $status == defauls {
+					border-color:#d7e7de;
+					color:#13ba61;
+				}@else {
+					border-color:currentColor;
+				}
+				
+				@if $status == hover {
+					color:#2bc975;
+				}
+				@if $status == downing {
+					color:#13ba61;
+				}
+				@if $size == large {
+					@if $status == downing {
+						color:#58c400;
+					}
+				}			
+				@if $status == done {
+					color:#ccd4de;
+				}
+			}
+			background-color:#fff;
+			border-width: 1px;
+			border-style: solid;
+		}
+			
+}
+
+@mixin btn {
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	transition-duration:0;
+	position: relative;
+}
+@mixin pp-btn(
+		$size:small,
+		$handle:install,
+		$status:defauls,
+		$hasbg:false
+	) {
+	@include btn-size($size);
+	@include border-color($size,$handle,$status,$hasbg);
+	@include btn;
+}
+@mixin gif-btn {
+	display: block;
+	text-indent: -999em;
+	border:0 none;
+}
+@mixin btn-installing (
+		$name,
+		$size:small,
+		$is-gif:true
+	) {	
+	$url : '../images/app/#{$name}.gif';
+	background:url($url) no-repeat;
+	@include btn-size($size,$is-gif);
+	@include gif-btn;
+}
+
+// small 
+.small-btn.install{
+	@include pp-btn;
+	&:hover {
+		@include pp-btn(small,install,hover);
+	}
+}
+.small-btn.install.downing{
+	@include pp-btn(small,install,downing);
+}
+.small-btn.install.installing{
+	@include btn-installing(small-installing,small);
+}
+.small-btn.install.done{
+	@include pp-btn(small,install,done);
+	&:hover {
+		@include pp-btn(small,install,hover);
+	}
+}
+.small-btn.update{
+	@include pp-btn(small,update);
+	&:hover {
+		@include pp-btn(small,update,hover);
+	}
+}
+.small-btn.update.downing{
+	@include pp-btn(small-btn,update,downing);
+}
+.small-btn.update.installing{
+	@include btn-installing(small-update,small);
+}
+.small-btn.update.done{
+	@include pp-btn(small-btn,update,done);
+	&:hover {
+		@include pp-btn(small,update,hover);
+	}
+}
+// middle
+.middle-btn.install{
+	@include pp-btn(middles,install);
+	&:hover {
+		@include pp-btn(middles,install,hover);
+	}
+}
+.middle-btn.install.downing{
+	@include pp-btn(middles,install,downing);
+}
+.middle-btn.install.installing{
+	@include btn-installing(m-installing,middles);
+}
+.middle-btn.install.done{
+	@include pp-btn(middles,install,done);
+	&:hover {
+		@include pp-btn(middles,install,hover);
+	}
+}
+.middle-btn.update{
+	@include pp-btn(middles,update);
+	&:hover {
+		@include pp-btn(middles,update,hover);
+	}
+}
+.middle-btn.update.downing{
+	@include pp-btn(middles,update,downing);
+}
+.middle-btn.update.installing{
+	@include btn-installing(m-update,middles);
+}
+.middle-btn.update.done{
+	@include pp-btn(middles,update,done);
+	&:hover {
+		@include pp-btn(middles,update,hover);
+	}
+}
+// large 
+.large-btn.install{
+	@include pp-btn(large,install,defauls,true);
+	&:hover {
+		@include pp-btn(large,install,hover,true);
+	}
+}
+.large-btn.install.downing{
+	@include pp-btn(large,install,downing);
+	.progress-color {
+		height: 34px;
+		background-color:#e6fbf0; 
+	}
+}
+.large-btn.install.installing{
+	@include btn-installing(large-installing,large);
+}
+.large-btn.install.done{
+	@include pp-btn(large,install,done);
+	&:hover {
+		@include pp-btn(large,install,hover,true);
+	}
+}
+.large-btn.update{
+	@include pp-btn(large,update,defauls,true);
+	&:hover {
+		@include pp-btn(large,update,hover,true);
+	}
+}
+.large-btn.update.downing{
+	@include pp-btn(large,update,downing);
+	.progress-color {
+		height: 34px;
+		background-color: #effae6;
+	}
+}
+.large-btn.update.installing{
+	@include btn-installing(large-update,large);
+}
+.large-btn.update.done{
+	@include pp-btn(large,update,done);
+	&:hover {
+		@include pp-btn(large,update,hover,true);
+	}
+}
+// xlarge
+.xlarge-btn.install{
+	@include pp-btn(xlarge,install,defauls,true);
+	&:hover {
+		@include pp-btn(xlarge,install,hover,true);
+	}
+}
+.xlarge-btn.install.downing{
+	@include pp-btn(xlarge,install,downing);
+	.progress-color {
+		height: 46px;
+	}
+}
+.xlarge-btn.install.installing{
+	@include btn-installing(xlarge-installing,xlarge);
+}
+.xlarge-btn.install.done{
+	@include pp-btn(xlarge,install,done);
+	&:hover {
+		@include pp-btn(xlarge,install,hover,true);
+	}
+}
+.xlarge-btn.update{
+	@include pp-btn(xlarge,update,defauls,true);
+	&:hover {
+		@include pp-btn(xlarge,update,hover,true);
+	}
+}
+.xlarge-btn.update.downing{
+	@include pp-btn(xlarge,update,downing);
+	.progress-color {
+		height: 46px;
+	}
+}
+.xlarge-btn.update.installing{
+	@include btn-installing(xlarge-update,xlarge);
+}
+.xlarge-btn.update.done{
+	@include pp-btn(xlarge,update,done);
+	&:hover {
+		@include pp-btn(xlarge,update,hover,true);
+	}
+}
+
+.downing {
+	span{
+		position: relative;
+		z-index: 5;
+	}
+	.progress-color {
+		display: block;
+		z-index: 1;
+	}
+}
+.progress-color {
+	position: absolute;
+	left: 0;
+	top:0;
+	height: 24px;	
+	display: none;
+}
+.install .progress-color {
+	background-color: #ddecff;
+}
+.update .progress-color {
+	background-color: #e6fbf0;
+}

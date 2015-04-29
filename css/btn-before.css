@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/*	全局按钮 安装 更新 效果
+	4种size 按钮 分别是
+	size 1 ----- 60 * 26 ( 58 * 24 ) border 1px	small 
+	size 2 ----- 70 * 26	( 68 * 24 ) border 1px	middle
+	size 3 ----- 138 * 48 (136 * 46) border 1px  xlarge 
+	size 4 ----- 90 *36 (88*34) 每日发现	large
+	每种size有 2中操作   install    ,  update
+	每种操作有 5中状态 分别是 default , hover , downing ,installing , done ;
+*/

@@ -1,0 +1,27 @@
+@charset "utf-8";
+//测试
+.example {
+ #{enumerate(".class", 2, 4)} {
+    background-color: #aaaaaa;
+    border: 2px solid #777777;
+    margin: 1em;
+  }
+}
+//笹 ti
+.test-image{
+	width:image-width('../images/mac_down_btn.png');
+	height:image-height('../images/mac_down_btn.png');
+}
+//
+.example-test1 {
+	color:adjust-saturation(#000,1);
+	background-color:shade(#f00,30%);
+}
+
+@import "mixin/iconfont";
+//test
+@include fontface("iconfont","../font/");
+
+.iconfont{
+	 @include iconfont("iconfont",64);
+} 

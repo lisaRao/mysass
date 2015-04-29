@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+@import "mixin/sprite-mixin";
+
+
+$normal:sprite-map('normal/*.png');
+$retina:sprite-map('retina-by-2/*.png');
+$retianHD:sprite-map('retina-by-3/*.png');
+
+.icon-beer {
+	@include retina-sprite-background(beer,$normal,$retina,$retianHD);
+	display: block;
+} 
+
+
+

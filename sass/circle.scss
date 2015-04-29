@@ -1,0 +1,76 @@
+@charset "utf-8";
+// css3  import
+@import "compass/css3";
+@import "mixin/animation";
+//定义
+$index:11;  				//循环语句 for i
+$index2:floor($index/2); 		//循环语句 for i
+$width:20px;				//	width 宽度
+$marginLeft:20px;			//margin-left
+$backgroundColor:#333;		//background-color
+
+//box shadow 定义
+@mixin boxShadow($blur,$blur1,$color){
+	box-shadow: inset -1px 1px $blur1 #444,
+				inset 1px -1px $blur1 #222,
+				0 0 $blur+px 0 $color;
+}
+body {
+	background:$backgroundColor;
+	margin:0;
+}
+.circle-box {
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:-355px;
+}
+.s {
+	position:relative;
+	border-radius:50%;
+	background:$backgroundColor;
+	float:left;
+	margin-left:$marginLeft;
+	box-shadow: inset -1px 1px 4px 2px #444,
+				inset 1px -1px 4px 2px #222;
+	@include transition(all 2s);
+	&:nth-child(n):hover {
+		@include animation(shadow2 linear 1s 1s infinite,shadow-in 1s);
+	}
+}
+@for $i from 0 to $index2{
+	$width2 : $width + (10*$i);
+	$color: $i*36;
+	.s:nth-child(#{$i +1}){
+		width : $width2;
+		height: $width2;
+		margin-top: -$width2/2;
+		@include animation(shadow linear 2s .5+($i/5)+s infinite);
+	}
+}
+$width2: $width+(10*$index2);
+@for $i from $index2 to $index {
+	$width3 : $width2 - (10*($i - $index2));
+	$color: $i*36;
+	.s:nth-child(#{$i +1}){
+		width:$width3;
+		height:$width3;
+		margin-top:-$width3/2;
+		@include animation(shadow linear 2s .5+($i/5)+s infinite);
+	}
+}
+
+@include keyframes(shadow){
+	0% { @include boxShadow(0,3px,hsl(80,100%,55%)); }
+	50% { @include boxShadow(20,3px,hsl(180,100%,55%)); }
+	100% { @include boxShadow(0,3px,hsl(80,100%,55%)); }
+}
+@include keyframes(shadow-in){
+	0% { @include boxShadow(10,3px,hsl(80,100%,60%));}
+	100% { @include boxShadow(0,5px,hsl(0,100%,60%));}
+}
+@include keyframes(shadow2){
+	0% { @include boxShadow(0,5px,hsl(0,100%,60%)); }
+	50% { @include boxShadow(10,5px,hsl(40,100%,60%)); }
+	100% { @include boxShadow(0,5px,hsl(0,100%,60%)); }
+}
